@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
-import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import styled from "styled-components";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Navbar, Footer, Sidebar, ThemeSettings } from "./components";
@@ -26,7 +25,7 @@ import {
 } from "./pages";
 
 const App = () => {
-  const [activeMenu, setActiveMenu] = useState(true);
+  const activeMenu = true;
 
   return (
     <App_Container>
@@ -43,7 +42,7 @@ const App = () => {
           <Sidebar />
         </div>
       ) : (
-        <div className="w-0 dark:bg-secondary-dark-bg">
+        <div className="w-0 dark:bg-secondary-dark-bg h-0">
           <Sidebar />
         </div>
       )}
@@ -93,7 +92,9 @@ const App = () => {
   );
 };
 
-const App_Container = styled.div``;
+const App_Container = styled.div`
+  /* overflow-x: hidden; */
+`;
 
 const Settings_Icon = styled(FiSettings)`
   height: 31px;
@@ -103,8 +104,8 @@ const Settings_Icon = styled(FiSettings)`
 
 const Settings_Icon_Container = styled.div`
   position: fixed;
-  right: 20px;
-  bottom: 5px;
+  right: 30px;
+  bottom: 20px;
   z-index: 1;
 `;
 
@@ -112,7 +113,7 @@ const Settings_Button = styled.button`
   size: 500px !important;
   padding: 12px;
   border-radius: 50px;
-  background-color: blue;
+  background-color: grey;
 `;
 
 export default App;
