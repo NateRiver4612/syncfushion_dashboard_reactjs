@@ -5,6 +5,8 @@ import { FiSettings } from "react-icons/fi";
 import styled from "styled-components";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Navbar, Footer, Sidebar, ThemeSettings } from "./components";
+import tw from "twin.macro";
+
 import {
   Ecommerce,
   Orders,
@@ -23,9 +25,10 @@ import {
   ColorMapping,
   Editor,
 } from "./pages";
+import { useStateContext } from "./context/contextProvider";
 
 const App = () => {
-  const activeMenu = true;
+  const { activeMenu } = useStateContext();
 
   return (
     <App_Container>
@@ -38,24 +41,24 @@ const App = () => {
       </Settings_Icon_Container>
 
       {activeMenu ? (
-        <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
+        <Active_Sidebar className="sidebar ">
           <Sidebar />
-        </div>
+        </Active_Sidebar>
       ) : (
-        <div className="w-0 dark:bg-secondary-dark-bg h-0">
+        <Unactive_Sidebar>
           <Sidebar />
-        </div>
+        </Unactive_Sidebar>
       )}
       <div
         className={
           activeMenu
-            ? "dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  "
+            ? "dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-100  "
             : "bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 "
         }
       >
-        <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
+        <Navbar_Container className="navbar">
           <Navbar />
-        </div>
+        </Navbar_Container>
 
         {/* Routes of application */}
         <div>
@@ -92,28 +95,32 @@ const App = () => {
   );
 };
 
+const Active_Sidebar = styled.div`
+  ${tw`w-72 fixed dark:bg-secondary-dark-bg bg-white `}
+`;
+
+const Unactive_Sidebar = styled.div`
+  ${tw`w-0 dark:bg-secondary-dark-bg h-0`}
+`;
+
+const Navbar_Container = styled.div`
+  ${tw`fixed md:static bg-main-bg dark:bg-main-dark-bg w-full`}
+`;
+
 const App_Container = styled.div`
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
 `;
 
 const Settings_Icon = styled(FiSettings)`
-  height: 31px;
-  width: 31px;
-  color: white;
+  ${tw`h-8 w-8 text-white`}
 `;
 
 const Settings_Icon_Container = styled.div`
-  position: fixed;
-  right: 30px;
-  bottom: 20px;
-  z-index: 1;
+  ${tw`fixed right-5 bottom-4 z-10`}
 `;
 
 const Settings_Button = styled.button`
-  size: 500px !important;
-  padding: 12px;
-  border-radius: 50px;
-  background-color: grey;
+  ${tw`text-2xl p-3 rounded-full bg-gray-600`}
 `;
 
 export default App;

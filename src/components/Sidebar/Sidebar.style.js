@@ -1,64 +1,35 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
+import tw from "twin.macro";
+import { useStateContext } from "../../context/contextProvider";
+
+const ContextData = () => {
+  const { currentColor } = useStateContext();
+
+  return currentColor;
+};
 
 export const Sidebar_Container = styled.div`
-  height: 100vh;
-  margin-left: 10px;
-
-  &.hover {
-    overflow: auto;
-  }
-
-  padding-bottom: 20px;
-
-  @media (max-width: 900px) {
-    overflow: hidden;
-  }
+  ${tw`h-screen ml-3 hover:overflow-auto md:overflow-hidden pb-4`}
 `;
 
 export const Sidebar_Title = styled.p`
-  color: grey;
-  opacity: 0.8;
-  margin: 12px;
-  margin-top: 10px;
-  text-transform: uppercase;
+  ${tw`text-gray-400 m-3 mt-1 uppercase`}
 `;
 
 export const Sidebar_Link = styled(Link)`
-  align-items: center;
-  display: flex;
-  margin-left: 12px;
-  margin-top: 15px;
-  justify-content: space-between;
-  font-size: 20px;
-  font-weight: bolder;
-
-  span {
-    padding-left: 13px;
-  }
+  ${tw`items-center flex ml-3 mt-4 justify-between text-xl gap-3 font-bold`}
 `;
 
 export const Sidebar_Link_Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-self: center;
+  ${tw`flex justify-between self-center`}
 `;
 
 export const Sidebar_NavLink = styled(NavLink)`
-  display: flex;
-  align-items: center;
-  padding: 10px 0px 10px 15px;
-  border-radius: 8px;
-  size: 3px;
-  margin: 12px;
-  color: #424f62;
+  ${tw`flex items-center pt-3 pb-3 pl-3 gap-4 rounded-lg m-3 text-gray-700 capitalize`}
 
   &.active {
-    background-color: grey;
+    background-color: ${(props) => props.currentColor};
     color: white;
-  }
-  span {
-    padding-left: 15px;
-    text-transform: capitalize;
   }
 `;
